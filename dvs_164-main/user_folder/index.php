@@ -4,6 +4,7 @@ require_once __DIR__ . "/backend/common.php";
 $guardian = isset($_SESSION["guardian"]) && is_string($_SESSION["guardian"])
     ? trim($_SESSION["guardian"])
     : "";
+$avatarFilename = guardianAvatarFilename($guardian);
 $patients = [];
 $vaccinationStatus = "No records";
 $remindersDue = 0;
@@ -146,9 +147,11 @@ $today = date("Y-m-d");
         <div class="hero-right">
 
             <a class="profile profile-link" href="pages/profile.php">
-                <div class="avatar">
-                    👩🏻
-                </div>
+                <?php if ($avatarFilename !== ""): ?>
+                    <img class="avatar" src="uploads/avatars/<?= htmlspecialchars($avatarFilename, ENT_QUOTES, "UTF-8") ?>" alt="">
+                <?php else: ?>
+                    <div class="avatar" aria-hidden="true">👩🏻</div>
+                <?php endif; ?>
 
                 <div class="profile-text">
                     Profile
@@ -170,9 +173,6 @@ $today = date("Y-m-d");
         </div>
 
 
-        <div class="baby-art">
-            👶🏻🧸
-        </div>
 
     </section>
 

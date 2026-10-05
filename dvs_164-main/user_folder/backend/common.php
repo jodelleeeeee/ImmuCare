@@ -38,10 +38,42 @@ $mysqli->query("
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
 ");
 
+$mysqli->query("
+    CREATE TABLE IF NOT EXISTS guardian_profiles (
+        guardian VARCHAR(255) NOT NULL PRIMARY KEY,
+        avatar_filename VARCHAR(80) NOT NULL DEFAULT '',
+        updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+");
+
 function currentGuardian(): string
 {
     return isset($_SESSION["guardian"]) && is_string($_SESSION["guardian"])
         ? trim($_SESSION["guardian"])
+        : "";
+}
+
+function guardianAvatarFilename(string $guardian): string
+{
+    global $mysqli;
+
+    if ($guardian === "") {
+        return "";
+    }
+
+    $stmt = $mysqli->prepare("
+        SELECT avatar_filename
+        FROM guardian_profiles
+        WHERE guardian = ?
+    ");
+    $stmt->bind_param("s", $guardian);
+    $stmt->execute();
+    $record = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+
+    $filename = is_array($record) ? (string) ($record["avatar_filename"] ?? "") : "";
+    return preg_match('/\A[a-f0-9]{32}\.(?:jpg|png|webp)\z/', $filename) === 1
+        ? $filename
         : "";
 }
 

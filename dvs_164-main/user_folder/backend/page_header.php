@@ -3,6 +3,7 @@
 $pageTitle = $pageTitle ?? "ImmuCare";
 $activePage = $activePage ?? "";
 $guardian = currentGuardian();
+$avatarFilename = guardianAvatarFilename($guardian);
 $flash = takeUserFlash();
 
 ?>
@@ -15,8 +16,8 @@ $flash = takeUserFlash();
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body>
-<div class="app inner-app">
+<body class="<?= $activePage === "profile" ? "profile-edit-body" : "" ?>">
+<div class="app inner-app<?= $activePage === "profile" ? " profile-edit-app" : "" ?>">
     <header class="inner-header">
         <a class="inner-brand" href="../index.php">
             <img src="../images/logo.png" alt="ImmuCare">
@@ -24,7 +25,11 @@ $flash = takeUserFlash();
         </a>
         <div class="inner-header-actions">
             <a class="inner-profile" href="profile.php">
-                <span class="inner-avatar">👩🏻</span>
+                <?php if ($avatarFilename !== ""): ?>
+                    <img class="inner-avatar" src="../uploads/avatars/<?= escapeHtml($avatarFilename) ?>" alt="">
+                <?php else: ?>
+                    <span class="inner-avatar">👩🏻</span>
+                <?php endif; ?>
                 <span><?= escapeHtml($guardian !== "" ? $guardian : "Profile") ?></span>
             </a>
             <?php if ($guardian !== ""): ?>
@@ -38,13 +43,15 @@ $flash = takeUserFlash();
         </div>
     </header>
 
-    <main class="inner-page">
+    <main class="inner-page<?= $activePage === "profile" ? " profile-edit-page" : "" ?>">
+        <?php if ($activePage !== "profile"): ?>
         <div class="inner-page-heading">
             <a class="back-home" href="../index.php" aria-label="Back to home">
                 <i class="fa-solid fa-arrow-left"></i>
             </a>
             <h1><?= escapeHtml($pageTitle) ?></h1>
         </div>
+        <?php endif; ?>
 
         <?php if ($flash): ?>
             <div class="notice notice-<?= escapeHtml((string) ($flash["type"] ?? "success")) ?>" role="status">
