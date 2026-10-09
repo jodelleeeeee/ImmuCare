@@ -178,8 +178,8 @@ $today = date("Y-m-d");
 
     <?php if ($guardian === ""): ?>
         <p class="dashboard-message" role="status">
-            Sign in with the guardian name and phone number registered with the clinic to view your records.
-            <a href="../user_login/">Sign in</a>
+            Sign in with the username and password provided by your clinic to view your records.
+            <a href="user_login/">Sign in</a>
         </p>
     <?php elseif ($patients === []): ?>
         <p class="dashboard-message" role="status">

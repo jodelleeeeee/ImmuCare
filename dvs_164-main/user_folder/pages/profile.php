@@ -195,7 +195,7 @@ require __DIR__ . "/../backend/page_header.php";
         <div class="profile-photo-circle">
             <span class="profile-photo-placeholder" aria-hidden="true">👩🏻</span>
         </div>
-        <a class="profile-change-photo" href="../../user_login/">Sign in to change photo</a>
+        <a class="profile-change-photo" href="../user_login/">Sign in to change photo</a>
     <?php endif; ?>
     <p class="profile-photo-hint">JPEG, PNG, or WebP · up to 5 MB</p>
 </section>

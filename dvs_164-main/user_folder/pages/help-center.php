@@ -12,7 +12,7 @@ require __DIR__ . "/../backend/page_header.php";
     <div class="help-list">
         <article class="help-item">
             <h2><i class="fa-solid fa-right-to-bracket"></i> How do I sign in?</h2>
-            <p>Use the guardian name and phone number recorded by your clinic. If your details do not work, contact the clinic to check your patient record.</p>
+            <p>Use the username and password provided by your clinic. If you do not have login credentials or they do not work, contact the clinic.</p>
         </article>
         <article class="help-item">
             <h2><i class="fa-solid fa-syringe"></i> Where can I see vaccination records?</h2>

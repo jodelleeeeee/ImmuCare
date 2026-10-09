@@ -33,9 +33,9 @@ $flash = takeUserFlash();
                 <span><?= escapeHtml($guardian !== "" ? $guardian : "Profile") ?></span>
             </a>
             <?php if ($guardian !== ""): ?>
-                <a class="sign-out-link" href="../../user_login/logout.php">Sign out</a>
+                <a class="sign-out-link" href="../user_login/logout.php">Sign out</a>
             <?php else: ?>
-                <a class="sign-out-link" href="../../user_login/">Sign in</a>
+                <a class="sign-out-link" href="../user_login/">Sign in</a>
             <?php endif; ?>
             <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme">
                 <i class="fa-solid fa-circle-half-stroke"></i>
@@ -61,7 +61,7 @@ $flash = takeUserFlash();
 
         <?php if ($guardian === ""): ?>
             <div class="notice notice-error" role="alert">
-                Sign in with the guardian name and phone number registered with the clinic to view your information.
-                <a href="../../user_login/">Sign in</a>
+                Sign in with the username and password provided by your clinic to view your information.
+                <a href="../user_login/">Sign in</a>
             </div>
         <?php endif; ?>

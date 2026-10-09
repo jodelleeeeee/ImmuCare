@@ -158,6 +158,10 @@ $patients = $result->fetch_all(MYSQLI_ASSOC);
                 Records
             </a>
 
+            <a href="guardian_accounts.php">
+                Guardian Accounts
+            </a>
+
             <a href="management.php">
                 Management
             </a>
